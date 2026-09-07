@@ -3,7 +3,7 @@
 const grid=document.querySelector('[data-characters]'),dialog=document.querySelector('#character-dialog');
 const esc=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const imageUrl=value=>{try{const u=new URL(value,location.href);return ['http:','https:','file:'].includes(u.protocol)?u.href:'./assets/images/placeholders/adventurer.svg';}catch{return './assets/images/placeholders/adventurer.svg';}};
-const portrait=(c,i)=>`<div class="portrait"><span class="portrait-tag">GUILD MEMBER / ${String(i+1).padStart(2,'0')}</span><img src="${esc(imageUrl(c.image))}" alt="${esc(c.name)}${c.placeholder?'の仮画像':'の立ち絵'}" width="240" height="280" loading="lazy">${c.placeholder?'<span class="portrait-label">PORTRAIT COMING SOON</span>':''}</div>`;
+const portrait=(c,i)=>`<div class="portrait${c.placeholder?'':' portrait--art'}"><span class="portrait-tag">GUILD MEMBER / ${String(i+1).padStart(2,'0')}</span><img src="${esc(imageUrl(c.image))}" alt="${esc(c.name)}${c.placeholder?'の仮画像':'のキャラクター画像'}" width="240" height="280" loading="lazy">${c.placeholder?'<span class="portrait-label">PORTRAIT COMING SOON</span>':''}</div>`;
 const members=window.KABUKURA_CHARACTERS||[];
 grid.innerHTML=members.map((c,i)=>`<article class="character-card">${portrait(c,i)}<div class="character-body"><h2>${esc(c.name)}</h2><span class="class-label">CLASS / ${esc(c.className)}</span><p>${esc(c.description)}</p><button class="gold-button" data-character="${i}" aria-haspopup="dialog" aria-label="${esc(c.name)}の詳細を見る">詳細を見る ${window.kabukuraIcon('arrow')}</button></div></article>`).join('')||'<p class="empty-state">冒険者の情報を準備中です。</p>';
 let opener;

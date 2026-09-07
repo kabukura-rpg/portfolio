@@ -1,5 +1,27 @@
-// ゲーム本体は未提供のため、全件未公開。公開時は url と status を変更します。
+// 公開中のゲーム。未公開ゲームを追加するときは status: "coming-soon", url: null を指定します。
 window.KABUKURA_GAMES = [
- { id: 'typing-rpg', title: '株クラRPG', subtitle: '詠唱タイピングバトル', platform: 'pc', thumbnail: null, url: null, difficulty: 3, players: 1, controls: 'キーボード', status: 'coming-soon' },
- { id: 'mobile-01', title: 'まだ見ぬ冒険', subtitle: '次のクエストを準備中', platform: 'mobile', thumbnail: null, url: null, difficulty: null, players: 1, controls: 'タップ', orientation: '縦向き', osNote: '対応環境は公開時にご案内', status: 'coming-soon' }
+  {
+    "id": "typing-rpg",
+    "title": "株クラTPG",
+    "subtitle": "株クラの仲間と冒険へ",
+    "platform": "pc",
+    "thumbnail": null,
+    "url": "https://kabukura-rpg.github.io/kabukura-rpg/?v=2",
+    "difficulty": null,
+    "players": 1,
+    "controls": "キーボード・クリック",
+    "status": "available"
+  },
+  {
+    "id": "chart-rider",
+    "title": "チャートを駆けろ！",
+    "subtitle": "CHART RIDER",
+    "platform": "mobile",
+    "thumbnail": null,
+    "url": "https://kabukura-rpg.github.io/kabukura-knife-catch/",
+    "difficulty": null,
+    "players": 1,
+    "controls": "タップ",
+    "status": "available"
+  }
 ];
