@@ -12,7 +12,7 @@
 - `assets/js/`：共通ナビゲーション、人物詳細、ゲームカード描画
 - `data/characters.js` / `data/games.js` / `data/site.js`：編集用データ
 - `assets/images/logo/kabukura-rpg.png`：提供ロゴのコピー
-- `assets/images/backgrounds/top.jpeg`：提供キービジュアル。横幅100%、縦横比を維持して全体表示。画像下部の「冒険を始める」でメニューへスクロールします（モバイルでは画像直下に配置）。
+- `assets/images/backgrounds/top.jpeg`：提供キービジュアル。横幅100%、縦横比を維持して全体表示。PCでは画像下部の「冒険を始める」でメニューへスクロールします。スマホでは独立したHTMLの歓迎メッセージ・ロゴ・メンバー名に続き、この画像全体を横幅100%・高さ自動で表示します。スマホ側には切り抜き・固定高さ・固定aspect-ratioを使用しません。
 - `assets/images/backgrounds/guild-hall.webp`：生成した背景素材。UI・人物を含みません
 - `assets/images/placeholders/adventurer.svg`：正式な人物の外見を創作しない、汎用の仮画像
 - `scripts/check.py` / `scripts/build.py`：任意の静的検証・配布用コピー
@@ -47,7 +47,7 @@
 
 ## 人物追加・差し替え
 
-`data/characters.js` の配列を編集します。`id`, `name`, `className`, `image`, `description`, `profile`, `stats` を設定してください。画像パスはHTMLを基準とした相対パスです。正式画像を設定したら `placeholder: false` に変更します。`stats` の `hp`, `investing`, `development` は0〜5、未設定は `null`。トップのロゴと人物はキービジュアル `assets/images/backgrounds/top.jpeg` に含まれており、別要素で重ねていません。
+`data/characters.js` の配列を編集します。`id`, `name`, `className`, `image`, `description`, `profile`, `stats` を設定してください。画像パスはHTMLを基準とした相対パスです。正式画像を設定したら `placeholder: false` に変更します。`stats` の `hp`, `investing`, `development` は0〜5、未設定は `null`。PCトップは `assets/images/backgrounds/top.jpeg` を全体表示します。スマホトップは専用レイアウトで、ロゴ・見出し・メンバー名・人物ビジュアルを別要素として構成しています。スマホ用メンバー名は `index.html` の `.mobile-member-list` で変更できます。
 
 ## 未設定・差し替え事項
 
