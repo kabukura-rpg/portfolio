@@ -4,7 +4,7 @@
 
 ## ページとファイル
 
-- `index.html`：ロゴ、ギルドホール、4つの入口、メッセージ
+- `index.html`：提供された `top.jpeg` のキービジュアル、メニューへのスクロール導線、4つの入口、メッセージ
 - `about.html`：プロジェクト紹介、世界観、基本情報
 - `characters.html`：4人の人物カードと詳細モーダル
 - `games-pc.html` / `games-mobile.html`：プラットフォーム別のクエスト一覧
@@ -12,6 +12,7 @@
 - `assets/js/`：共通ナビゲーション、人物詳細、ゲームカード描画
 - `data/characters.js` / `data/games.js` / `data/site.js`：編集用データ
 - `assets/images/logo/kabukura-rpg.png`：提供ロゴのコピー
+- `assets/images/backgrounds/top.jpeg`：提供キービジュアル。横幅100%、縦横比を維持して全体表示。画像下部の「冒険を始める」でメニューへスクロールします（モバイルでは画像直下に配置）。
 - `assets/images/backgrounds/guild-hall.webp`：生成した背景素材。UI・人物を含みません
 - `assets/images/placeholders/adventurer.svg`：正式な人物の外見を創作しない、汎用の仮画像
 - `scripts/check.py` / `scripts/build.py`：任意の静的検証・配布用コピー
@@ -46,7 +47,7 @@
 
 ## 人物追加・差し替え
 
-`data/characters.js` の配列を編集します。`id`, `name`, `className`, `image`, `description`, `profile`, `stats` を設定してください。画像パスはHTMLを基準とした相対パスです。正式画像を設定したら `placeholder: false` に変更します。`stats` の `hp`, `investing`, `development` は0〜5、未設定は `null`。トップに表示する名前も同じデータから自動生成されます。
+`data/characters.js` の配列を編集します。`id`, `name`, `className`, `image`, `description`, `profile`, `stats` を設定してください。画像パスはHTMLを基準とした相対パスです。正式画像を設定したら `placeholder: false` に変更します。`stats` の `hp`, `investing`, `development` は0〜5、未設定は `null`。トップのロゴと人物はキービジュアル `assets/images/backgrounds/top.jpeg` に含まれており、別要素で重ねていません。
 
 ## 未設定・差し替え事項
 
