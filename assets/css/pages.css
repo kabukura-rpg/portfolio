@@ -8,3 +8,34 @@
 .modal-layout .portrait--art{height:auto;min-height:0;display:flex;align-items:center}
 .modal-layout .portrait--art img{padding:0;max-width:none;height:auto;max-height:75dvh;object-fit:contain}
 @media(max-width:767px){.modal-layout .portrait--art{height:auto;aspect-ratio:1}.modal-layout .portrait--art img{width:100%;height:100%;max-height:none}}
+
+/* Quest content and launch surface can receive motion independently later. */
+.quest-body{display:flex;flex-direction:column;gap:16px}
+.quest-subtitle{margin:4px 0 0}
+.quest-description{font-size:15px;line-height:1.85;color:var(--text-sub);margin:0}
+.quest-controls .quest-meta{margin:0}
+.quest-operation-note{font:13px/1.7 var(--sans);color:var(--text-sub);margin:10px 0 0}
+.quest-launch{margin-top:auto}
+.quest-launch-content{display:inline-flex;align-items:center;justify-content:center;gap:10px}
+.quest-facts{display:flex;flex-wrap:wrap;gap:8px 24px;margin:0;font-size:12px}
+.quest-facts div{gap:12px}
+.quest-grid[data-layout="single"]{grid-template-columns:minmax(0,1fr);max-width:1040px;margin-inline:auto}
+.quest-grid[data-layout="single"] .quest-card{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr)}
+.quest-grid[data-layout="single"] .quest-art{width:100%;aspect-ratio:auto;min-width:0;background:#100e0b}
+.quest-grid[data-layout="single"] .quest-art img{object-fit:contain}
+.quest-grid[data-layout="single"] .quest-badge{top:auto;bottom:12px}
+.quest-grid[data-layout="single"] .quest-body{padding:30px;border-left:1px solid #715536}
+@media(max-width:767px){
+  .game-page .page-head{padding:20px 0 14px}
+  .game-page .crumb{margin-bottom:12px}
+  .game-page .page-head .eyebrow{margin-bottom:4px}
+  .game-page .page-head h1{margin:6px 0}
+  .game-page .quest-intro{padding:10px 14px;margin-bottom:16px;gap:4px 12px;flex-direction:row;align-items:center;flex-wrap:wrap}
+  .quest-grid[data-layout="single"] .quest-card{grid-template-columns:minmax(0,1fr)}
+  .quest-grid[data-layout="single"] .quest-art{aspect-ratio:3/2;max-height:170px}
+  .quest-grid[data-layout="single"] .quest-body{padding:18px;border-left:0;border-top:1px solid #715536;gap:12px}
+  .quest-grid[data-layout="single"] .quest-badge{left:8px;top:auto;bottom:8px;font-size:8px;padding:3px 5px}
+  .quest-body h2{font-size:22px}
+  .quest-description{font-size:14px;line-height:1.75}
+  .quest-operation-note{font-size:12px}
+}

@@ -6,19 +6,44 @@ const icon=window.kabukuraIcon;
 document.querySelectorAll('[data-icon]').forEach(el=>el.innerHTML=icon(el.dataset.icon));
 const links=[['index.html','TOP'],['about.html','株クラRPGとは'],['characters.html','人物紹介'],['games-pc.html','PCゲーム'],['games-mobile.html','スマホゲーム']];
 const current=location.pathname.split('/').pop() || 'index.html';
-const nav=links.map(([url,label])=>`<a href="./${url}"${current===url?' aria-current="page"':''}>${label}</a>`).join('');
+const nav=links.map(([url,label])=>`<a data-navigation="page" data-destination="${url.replace('.html','')}" href="./${url}"${current===url?' aria-current="page"':''}>${label}</a>`).join('');
+const menuAreas=['GUILD HALL','ARCHIVES','ADVENTURERS HALL','PC QUEST','MOBILE QUEST'];
+const headerNav=links.map(([url,label],i)=>`<a data-navigation="page" data-destination="${url.replace('.html','')}" href="./${url}"${current===url?' aria-current="page"':''}><span>${label}</span><small class="menu-area" aria-hidden="true">${menuAreas[i]}</small></a>`).join('');
 const header=document.querySelector('[data-header]');
-if(header)header.innerHTML=`<div class="container header-inner"><a href="./index.html" class="brand">${icon('sword')}<span>株クラRPG<small>ADVENTURERS GUILD</small></span></a><button class="menu-toggle" aria-label="メニューを開く" aria-expanded="false" aria-controls="main-nav">${icon('menu')}</button><nav class="main-nav" id="main-nav" aria-label="メインナビゲーション">${nav}</nav></div>`;
+if(header)header.innerHTML=`<div class="container header-inner"><a href="./index.html" data-navigation="page" data-destination="index" class="brand">${icon('sword')}<span>株クラRPG<small>ADVENTURERS GUILD</small></span></a><button class="menu-toggle" aria-label="メニューを開く" aria-expanded="false" aria-controls="main-nav">${icon('menu')}</button><nav class="main-nav" id="main-nav" aria-label="メインナビゲーション"><p class="menu-caption" aria-hidden="true">GUILD MENU <span>行き先を選ぶ</span></p>${headerNav}</nav></div>`;
 const config=window.KABUKURA_SITE||{};
 const safeUrl=value=>{try {const u=new URL(value,location.href);return ['http:','https:'].includes(u.protocol)?u.href:null;}catch{return null;}};
 const social=[['X',config.xUrl],['GitHub',config.githubUrl]].map(([label,url])=>{const href=url&&safeUrl(url);return href?`<a href="${href.replaceAll('&','&amp;').replaceAll('"','&quot;')}" target="_blank" rel="noopener noreferrer">${label} ↗</a>`:`<span class="social-unset">${label}（準備中）</span>`;}).join('');
-document.querySelector('[data-footer]').innerHTML=`<div class="container"><div class="footer-top"><a class="footer-brand" href="./index.html">株クラRPG</a><nav class="footer-nav" aria-label="フッターナビゲーション">${nav}</nav></div><div class="footer-bottom"><span>© ${new Date().getFullYear()} 株クラRPG</span><div class="social-links">${social}</div><span>さあ、爆益の先へ。</span></div></div>`;
+document.querySelector('[data-footer]').innerHTML=`<div class="container"><div class="footer-top"><a class="footer-brand" data-navigation="page" data-destination="index" href="./index.html">株クラRPG</a><nav class="footer-nav" aria-label="フッターナビゲーション">${nav}</nav></div><div class="footer-bottom"><span>© ${new Date().getFullYear()} 株クラRPG</span><div class="social-links">${social}</div><span>さあ、爆益の先へ。</span></div></div>`;
 const toggle=document.querySelector('.menu-toggle'),menu=document.querySelector('.main-nav');
 if(toggle&&menu){
-function closeMenu(){toggle.setAttribute('aria-expanded','false');toggle.setAttribute('aria-label','メニューを開く');menu.classList.remove('is-open');toggle.innerHTML=icon('menu');}
-toggle.addEventListener('click',e=>{e.stopPropagation();const open=toggle.getAttribute('aria-expanded')!=='true';toggle.setAttribute('aria-expanded',String(open));toggle.setAttribute('aria-label',open?'メニューを閉じる':'メニューを開く');menu.classList.toggle('is-open',open);toggle.innerHTML=icon(open?'close':'menu');});
-document.addEventListener('keydown',e=>{if(e.key==='Escape'&&menu.classList.contains('is-open')){closeMenu();toggle.focus();}});
-document.addEventListener('click',e=>{if(!e.target.closest('.site-header'))closeMenu();});
-matchMedia('(min-width: 768px)').addEventListener('change',e=>{if(e.matches)closeMenu();});
+  const mobileMenu=matchMedia('(max-width: 767px)');
+  function closeMenu(){
+    toggle.setAttribute('aria-expanded','false');
+    toggle.setAttribute('aria-label','メニューを開く');
+    menu.classList.remove('is-open');
+    menu.inert=mobileMenu.matches;
+    toggle.innerHTML=icon('menu');
+  }
+  toggle.addEventListener('click',e=>{
+    e.stopPropagation();
+    const open=toggle.getAttribute('aria-expanded')!=='true';
+    toggle.setAttribute('aria-expanded',String(open));
+    toggle.setAttribute('aria-label',open?'メニューを閉じる':'メニューを開く');
+    menu.inert=!open&&mobileMenu.matches;
+    menu.classList.toggle('is-open',open);
+    toggle.innerHTML=icon(open?'close':'menu');
+  });
+  document.addEventListener('keydown',e=>{
+    if(e.key==='Escape'&&menu.classList.contains('is-open')){closeMenu();toggle.focus();}
+  });
+  document.addEventListener('click',e=>{
+    if(!e.target.closest('.site-header')||e.target.closest('.main-nav a'))closeMenu();
+  });
+  document.addEventListener('focusin',e=>{if(!header.contains(e.target))closeMenu();});
+  mobileMenu.addEventListener('change',closeMenu);
+  window.addEventListener('pagehide',closeMenu);
+  window.addEventListener('pageshow',closeMenu);
+  closeMenu();
 }
 })();
