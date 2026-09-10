@@ -39,3 +39,13 @@
   .quest-description{font-size:14px;line-height:1.75}
   .quest-operation-note{font-size:12px}
 }
+
+/* Character details only: keep long profiles and links inside the status window. */
+.character-modal{overflow-y:auto;overscroll-behavior:contain}
+.modal-copy{min-width:0}
+.character-detail-section{margin-top:24px}
+.character-detail-section .eyebrow{margin-bottom:12px}
+.character-profile{white-space:pre-line;overflow-wrap:anywhere}
+.character-links{display:flex;flex-wrap:wrap;gap:10px}
+.character-links .character-link{min-height:44px;max-width:100%;padding:10px 14px;font:14px/1.6 var(--sans);letter-spacing:0;overflow-wrap:anywhere}
+.character-link:hover,.character-link:active{border-color:var(--gold);background:#302317;color:var(--gold-light)}
