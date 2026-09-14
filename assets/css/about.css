@@ -1,0 +1,17 @@
+/* A small, non-interactive layer, loaded only by the story page. */
+.sakura-layer{position:fixed;inset:0;overflow:hidden;pointer-events:none;z-index:10;contain:strict}
+.sakura-layer[hidden]{display:none}
+.sakura-petal{position:absolute;left:var(--left);top:-24px;width:var(--size);height:calc(var(--size)*1.35);background:linear-gradient(135deg,#fff0f2,#f1b9c7 65%,#c7849a);border-radius:75% 15% 65% 35%;clip-path:polygon(0 0,48% 0,58% 15%,72% 2%,100% 0,100% 100%,0 100%);opacity:0;animation:sakura-fall var(--duration) linear var(--delay) infinite}
+.sakura-toggle{display:block;margin-top:16px;min-height:44px;padding:8px 14px;border:1px solid #806849;background:#1c1610;color:var(--text-sub);font:12px/1.5 var(--sans);cursor:pointer}
+.sakura-toggle:hover{border-color:var(--gold);color:var(--gold-light)}
+.sakura-toggle[hidden]{display:none}
+.page-head>p:last-of-type{color:var(--text-sub);margin:0}
+@keyframes sakura-fall{
+  0%{transform:translate3d(-2vw,-24px,0) rotate(0deg);opacity:0}
+  12%{opacity:.55}
+  45%{transform:translate3d(4vw,45vh,0) rotate(150deg);opacity:.45}
+  80%{opacity:.55}
+  100%{transform:translate3d(-3vw,calc(100vh + 48px),0) rotate(330deg);opacity:0}
+}
+@media(max-width:767px){.sakura-petal:nth-child(n+7){display:none}}
+@media(prefers-reduced-motion:reduce){.sakura-layer,.sakura-toggle{display:none}.sakura-petal{animation:none}}
