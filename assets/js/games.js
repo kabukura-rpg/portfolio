@@ -3,7 +3,11 @@
 const grid=document.querySelector('[data-games]'),platform=grid.dataset.games;
 const esc=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const safeUrl=value=>{if(!value)return null;try{const u=new URL(value,location.href);return ['http:','https:','file:'].includes(u.protocol)?u.href:null;}catch{return null;}};
-const games=(window.KABUKURA_GAMES||[]).filter(g=>g.platform===platform);
+const PLATFORM_LABELS={pc:{ja:'PC',en:'PC'},mobile:{ja:'スマートフォン',en:'SMARTPHONE'}};
+// platforms は対応端末の配列。旧データの platform 文字列も読めるようにしておく。
+const platformsOf=g=>(Array.isArray(g.platforms)?g.platforms:g.platform?[g.platform]:[]).filter(p=>PLATFORM_LABELS[p]);
+const platformLabel=(g,key)=>platformsOf(g).map(p=>PLATFORM_LABELS[p][key]).join(' / ');
+const games=(window.KABUKURA_GAMES||[]).filter(g=>platformsOf(g).includes(platform));
 const available=g=>g.status==='available'&&safeUrl(g.url);
 // Count selects presentation only; real links remain the source of navigation.
 grid.dataset.layout=games.length===1?'single':'collection';
@@ -16,6 +20,7 @@ grid.innerHTML=games.map((g,i)=>{
     <div class="quest-art" data-transition-visual>
       ${thumb?`<img src="${esc(thumb)}" alt="${esc(g.thumbnailAlt||g.title+' '+g.subtitle)}" width="960" height="640" loading="${i===0?'eager':'lazy'}">`:window.kabukuraIcon(url?'sword':'lock')}
       <span class="quest-badge">QUEST ${String(i+1).padStart(2,'0')} / ${url?'AVAILABLE':'COMING SOON'}</span>
+      ${platformsOf(g).length>1?`<span class="quest-platform-badge">${esc(platformLabel(g,'en'))}</span>`:''}
     </div>
     <div class="quest-body">
       <div class="quest-heading"><h2>${esc(g.title)}</h2><p class="quest-subtitle">${esc(g.subtitle)}</p></div>
@@ -27,7 +32,7 @@ grid.innerHTML=games.map((g,i)=>{
       <div class="quest-launch">
         ${url?`<a class="gold-button" data-navigation="game" data-destination="${esc(g.id)}" href="${esc(url)}"${g.newTab?' target="_blank" rel="noopener noreferrer"':''}><span class="quest-launch-content" data-transition-visual>冒険を始める ${window.kabukuraIcon('arrow')}</span></a>`:`<button class="sub-button" disabled>${window.kabukuraIcon('lock')} 公開準備中</button>`}
       </div>
-      <dl class="quest-facts"><div><dt>難易度</dt><dd aria-label="${g.difficulty==null?'未定':`5段階中${g.difficulty}`}">${difficulty}</dd></div><div><dt>対応</dt><dd>${platform==='pc'?'PC':'スマートフォン'}</dd></div></dl>
+      <dl class="quest-facts"><div><dt>難易度</dt><dd aria-label="${g.difficulty==null?'未定':`5段階中${g.difficulty}`}">${difficulty}</dd></div><div><dt>対応</dt><dd>${esc(platformLabel(g,'ja'))}</dd></div></dl>
     </div>
   </article>`;
 }).join('')||'<p class="empty-state">新しいクエストを準備中です。</p>';

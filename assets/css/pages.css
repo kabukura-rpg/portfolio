@@ -16,6 +16,7 @@
 .quest-controls .quest-meta{margin:0}
 .quest-operation-note{font:13px/1.7 var(--sans);color:var(--text-sub);margin:10px 0 0}
 .quest-launch{margin-top:auto}
+.quest-platform-badge{position:absolute;right:16px;top:14px;font:10px var(--sans);letter-spacing:.16em;color:#dfbf85;border:1px solid #87643c;padding:4px 8px;background:#17110bc9}
 .quest-launch-content{display:inline-flex;align-items:center;justify-content:center;gap:10px}
 .quest-facts{display:flex;flex-wrap:wrap;gap:8px 24px;margin:0;font-size:12px}
 .quest-facts div{gap:12px}
@@ -35,6 +36,9 @@
   .quest-grid[data-layout="single"] .quest-art{aspect-ratio:3/2;max-height:170px}
   .quest-grid[data-layout="single"] .quest-body{padding:18px;border-left:0;border-top:1px solid #715536;gap:12px}
   .quest-grid[data-layout="single"] .quest-badge{left:8px;top:auto;bottom:8px;font-size:8px;padding:3px 5px}
+  .quest-badge,.quest-platform-badge{font-size:8px;padding:3px 5px}
+  .quest-platform-badge{right:8px;top:8px}
+  .quest-grid[data-layout="single"] .quest-platform-badge{top:auto;bottom:8px}
   .quest-body h2{font-size:22px}
   .quest-description{font-size:14px;line-height:1.75}
   .quest-operation-note{font-size:12px}

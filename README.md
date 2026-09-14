@@ -32,7 +32,7 @@
   id: 'my-game',
   title: 'ゲーム名',
   subtitle: '短い説明',
-  platform: 'pc', // pc または mobile
+  platforms: ['pc'], // 対応端末。両対応は ['pc', 'mobile']
   thumbnail: './assets/images/games/my-game.webp', // 未設定は null
   url: './games/pc/my-game/index.html', // 外部 https URL も利用可能
   difficulty: 3, // 0〜5、未定は null
@@ -42,6 +42,8 @@
   newTab: false // 既定は同じタブで起動
 }
 ```
+
+`platforms` に含まれる端末のページへ掲載されます。両対応のゲームはPC・スマホ両方の一覧に並び、カードに `PC / SMARTPHONE` のバッジが付きます。
 
 スマホ向けには `orientation: '縦向き'` と `osNote: '対応環境の注記'` も指定できます。`status: 'available'` と有効な `url` の両方があると「冒険を始める」が表示されます。それ以外は無効な準備中ボタンです。データが0件のページには空状態が表示されます。
 
