@@ -29,5 +29,47 @@ window.KABUKURA_GAMES = [
     "players": 1,
     "controls": "タップ",
     "status": "available"
+  },
+  {
+    "id": "knife-catch",
+    "title": "落ちるナイフを掴め",
+    "subtitle": "KNIFE CATCH",
+    "platform": "mobile",
+    "thumbnail": "./assets/images/games/knife-catch.png",
+    "description": "落ちてくるナイフをタイミングよくキャッチする、スマホ向けの反射神経ミニゲーム。",
+    "url": "https://kabukura-rpg.github.io/chartDash/",
+    "difficulty": null,
+    "players": 1,
+    "controls": "片手操作",
+    "status": "available",
+    "thumbnailAlt": "落ちるナイフを掴めのタイトル画面"
+  },
+  {
+    "id": "daily-bottom",
+    "title": "底値を掴め！",
+    "subtitle": "DAILY BOTTOM",
+    "platform": "mobile",
+    "thumbnail": "./assets/images/games/daily-bottom.png",
+    "thumbnailAlt": "底値を掴め！ DAILY BOTTOMのタイトル画面",
+    "description": "動くチャートを見て、底値を狙ってBUY。デイリーと練習モードで挑戦するタイミングゲーム。",
+    "url": "https://kabukura-rpg.github.io/nanpinmaster/",
+    "difficulty": null,
+    "players": 1,
+    "controls": "BUYボタンをタップ",
+    "status": "available"
+  },
+  {
+    "id": "portfolio-roguelite",
+    "title": "株クラ｜20年の相場を生き抜く",
+    "subtitle": "PORTFOLIO ROGUELITE",
+    "platform": "mobile",
+    "thumbnail": "./assets/images/games/portfolio-roguelite.png",
+    "thumbnailAlt": "株クラ PORTFOLIO ROGUELITEのタイトル画面",
+    "description": "100万円を元手に、20年間の市場を生き抜く。投資先を選び、手札を組み合わせ、相場を攻略する。",
+    "url": "https://kabukura-rpg.github.io/Roguelite/",
+    "difficulty": null,
+    "players": 1,
+    "controls": "タップで投資先・戦略カードを選択",
+    "status": "available"
   }
 ];
